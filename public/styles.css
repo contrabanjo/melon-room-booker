@@ -1,0 +1,53 @@
+*{
+    box-sizing: border-box;
+}
+
+html, body {
+ height: 100%;
+ margin: 0;
+
+ font-family: system-ui;
+}
+
+.room-name{
+  text-align: center;
+}
+
+.hours {
+ display: flex;
+ border: thin solid black;
+ justify-content: space-around;
+ text-align: center;
+}
+
+.hours div:not(.unavailable):hover  {
+ background: #E1F5FE;
+}
+
+.hours div {
+ flex: 1;
+}
+
+.AM {
+ background: orange;
+}
+
+.AM:nth-child(odd){
+ background: #FFC107;
+}
+
+.PM {
+ background: green
+}
+
+.PM:nth-child(odd){
+ background: #8BC34A;
+}
+
+.unavailable {
+ background: grey;
+}
+
+.unavailable:nth-child(odd) {
+ background: lightgray;
+}
