@@ -9,7 +9,57 @@ html, body {
  font-family: system-ui;
 }
 
+#root{
+  height: 100%;
+}
+
+.App {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 1fr 9fr;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  margin: 0px 24px;
+}
+
+#title {
+ grid-column: 3;
+ font-size: xxx-large
+}
+
+#date-changer {
+ border: solid thin black;
+ grid-column: 1;
+ grid-row: 2;
+
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
+
+ font-size: 35px;
+}
+
+#date-changer button{
+  height: 100%;
+  font-weight: 1000;
+  font-size: 50px;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.rooms {
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+ 
+  grid-row: 3;
+  grid-column: 1/4;
+}
+
 .room-name{
+  font-size: x-large;
   text-align: center;
 }
 
@@ -20,34 +70,47 @@ html, body {
  text-align: center;
 }
 
-.hours div:not(.unavailable):hover  {
+.hours div>div:not(.unavailable, .reserved):hover  {
  background: #E1F5FE;
+ cursor: pointer;
 }
 
 .hours div {
  flex: 1;
+
+ height: 50px;
+
+ 
+ 
+ display: flex;
+ flex-direction: column;
+ justify-content: flex-end;
 }
 
-.AM {
- background: orange;
+.hours div>div{
+  height: 50px;
 }
 
-.AM:nth-child(odd){
- background: #FFC107;
+.hours :nth-child(odd) .available{
+  background: #FFC107;
 }
 
-.PM {
- background: green
+.hours :nth-child(odd) .unavailable{
+  background: lightgray;
 }
 
-.PM:nth-child(odd){
- background: #8BC34A;
+.available {
+  background: orange
 }
 
 .unavailable {
  background: grey;
 }
 
-.unavailable:nth-child(odd) {
- background: lightgray;
+.selected {
+ background: #E65100;
+}
+
+.reserved {
+ background: dodgerblue
 }

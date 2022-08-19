@@ -20,13 +20,13 @@ class SingleRoomAvailability extends Component{
 						hourClassName = "unavailable"
 					} else if (this.props.room.reservedHours.includes(e)) {
 						hourClassName = "reserved"
-					} else if (this.state.selectedHour === e) {
+					} else if (this.state.selectedHour.split(" ")[0] === e) {
 						hourClassName = "selected"
 					} else {
-						hourClassName = e.slice(-2) === "AM" ? "AM" : "PM"
+						hourClassName = "available"
 					}
-					return (<div>
-						<div key={index} onClick={(e)=> this.hourClickHandler(e)} className={hourClassName} name={e}>{e}</div>
+					return (<div key={index}>
+						<div  onClick={(e)=> this.hourClickHandler(e)} className={hourClassName} id={e + " " + this.props.room.name}>{e}</div>
 						</div>
 						)
 				})}
@@ -35,7 +35,7 @@ class SingleRoomAvailability extends Component{
 	}
 
 	hourClickHandler(e){
-		this.setState({selectedHour: e.target.name })
+		this.setState({selectedHour: e.target.id })
 	}
 
 	render(){
