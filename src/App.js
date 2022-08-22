@@ -54,11 +54,19 @@ class App extends Component{
 	}
 
 	backButtonClickHandler(e){
-
+		let dateCopy = this.state.currentDate;
+		dateCopy.setDate(dateCopy.getDate()-1)
+		this.setState({
+			currentDate: dateCopy
+		})
 	}
 
 	forwardButtonClickHandler(e){
-
+		let dateCopy = this.state.currentDate;
+		dateCopy.setDate(dateCopy.getDate()+1)
+		this.setState({
+			currentDate: dateCopy
+		})
 	}
 
 	render(){
@@ -66,9 +74,9 @@ class App extends Component{
 		 <div className="App">
 		 	<div id="title">Melon Room Scheduler</div>
 		 	<div id="date-changer">
-		 		<button>{"<"}</button>
+		 		<button onClick={e => this.backButtonClickHandler(e)}>{"<"}</button>
 		 		<div>{this.state.currentDate.toLocaleDateString()}</div>
-		 		<button>{">"}</button>
+		 		<button onClick={e => this.forwardButtonClickHandler(e)}>{">"}</button>
 		 	</div>
 		 	<div className ="rooms">
 		 	 	{allRooms.map((item, index) => <SingleRoomAvailability key={index} room={item}/>)}
