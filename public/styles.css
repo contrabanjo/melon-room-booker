@@ -24,7 +24,7 @@ html, body {
 
 #title {
  grid-column: 3;
- font-size: xxx-large
+ font-size: xxx-large;
 }
 
 #date-changer {
@@ -71,7 +71,7 @@ html, body {
 }
 
 .hours div>div:not(.unavailable, .reserved):hover  {
- background: #E1F5FE;
+ background: #b5e3f8;
  cursor: pointer;
 }
 
@@ -96,7 +96,7 @@ html, body {
 }
 
 .hours :nth-child(odd) .unavailable{
-  background: lightgray;
+  background: #b0a4cf;
 }
 
 .available {
@@ -104,7 +104,7 @@ html, body {
 }
 
 .unavailable {
- background: grey;
+ background:#70767f;
 }
 
 .selected {
