@@ -1,3 +1,7 @@
 node_modules
 dist
 package-lock.json
+*.png
+*.svg
+public/browserconfig.xml
+public/manifest.json
