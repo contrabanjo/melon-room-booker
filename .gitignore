@@ -5,3 +5,4 @@ package-lock.json
 *.svg
 public/browserconfig.xml
 public/manifest.json
+*hot-update*

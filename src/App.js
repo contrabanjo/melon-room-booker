@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import SingleRoomAvailability from "./Components/SingleRoomAvailability.jsx"
 
-import {hot} from "react-hot-loader";
+//import {hot} from "react-hot-loader";
 
 const sampleRoom = {
 		name: "Black Oak Room",
@@ -49,12 +49,24 @@ class App extends Component{
 	constructor(props) {
     	super(props);
     	this.state = {
-    		currentDate: new Date()
+    		currentDate: new Date(),
+    		rooms: []
     	};
 	}
 
+	componentDidMount(){
+		console.log("parent component mounted")
+		fetch("/rooms").then((res)=> res.json()).then(data => this.setState({
+			rooms: data
+		}));
+	}
+
+	componentDidUpdate(prevProps, prevState){
+		console.log("parent current state", this.state.currentDate, "parent prev date", prevState.currentDate)
+	}
+
 	backButtonClickHandler(e){
-		let dateCopy = this.state.currentDate;
+		const dateCopy = new Date(this.state.currentDate);
 		dateCopy.setDate(dateCopy.getDate()-1)
 		this.setState({
 			currentDate: dateCopy
@@ -62,11 +74,11 @@ class App extends Component{
 	}
 
 	forwardButtonClickHandler(e){
-		let dateCopy = this.state.currentDate;
+		const dateCopy = new Date(this.state.currentDate);
 		dateCopy.setDate(dateCopy.getDate()+1)
 		this.setState({
 			currentDate: dateCopy
-		})
+		});
 	}
 
 	render(){
@@ -79,11 +91,11 @@ class App extends Component{
 		 		<button onClick={e => this.forwardButtonClickHandler(e)}>{">"}</button>
 		 	</div>
 		 	<div className ="rooms">
-		 	 	{allRooms.map((item, index) => <SingleRoomAvailability key={index} room={item}/>)}
+		 	 	{this.state.rooms.map((item, index) => <SingleRoomAvailability key={index} date={this.state.currentDate} room={item}/>)}
 		 	</div>
 		 </div>
 		);
 	}
 }
 
-export default hot(module)(App);
+export default App;
