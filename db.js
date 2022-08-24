@@ -44,7 +44,14 @@ function getAllRooms(){
   return pool.query(sql);
 }
 
-getAllRooms().then( res => console.log(res.rows))
+function getOpenHoursForDay(day, institutionID){
+  const sql = "SELECT " + day +  " FROM institutions WHERE ID =" + institutionID + ";"
+  return pool.query(sql);
+}
 
+getAllRooms().then( res => {
+  console.log(res.rows)
+})
+getOpenHoursForDay("monday", 1).then(res => console.log(res.rows))
 // module.exports.addPodcastToDB = addPodcastToDB;
 // module.exports.getPodcast = getPodcast;
