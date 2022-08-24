@@ -15,14 +15,6 @@ if (port == null || port == "") {
 }
 
 app.use(express.static(path.join(__dirname, "public")))
-//app.use(express.static("public"))
-
-
-//app.use(cors());
-
-// app.get('*', (req, res) => {
-//    //res.sendFile(path.join(__dirname, "..", "public", "index.html"));
-// });
 
 app.get('/rooms', (req, res)=>{
   db.getAllRooms().then(result => res.send(result.rows));
@@ -32,6 +24,15 @@ app.get('/hours',(req, res)=>{
   db.getOpenHoursForDay(req.query.day, req.query.institution).then(result => {
     res.send(result.rows[0][req.query.day])
   });
+})
+
+app.post('/bookings', (req, res)=>{
+  db.addBooking(req.body.room, req.body.date, req.body.user);
+  res.send()
+})
+
+app.get('/bookings', (req, res)=>{
+  db.getBookingsForRoom(req.query.room, req.query.date).then(result=> res.send(result.rows));
 })
 
 

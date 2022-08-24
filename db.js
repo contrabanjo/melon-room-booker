@@ -49,11 +49,34 @@ function getOpenHoursForDay(day, institutionID){
   return pool.query(sql);
 }
 
-// getAllRooms().then( res => {
-//   console.log(res.rows)
-// })
+//TODO: make it so you can't save a booking to a room/time that already has one
+function addBooking(room, date, user){
+  const sql ="INSERT INTO bookings VALUES(DEFAULT, '" + room + "','" + date + "','" + user + "');"
+  pool.connect((err, client, release)=> {
+    if (err){
+      return console.error("Error acquiring client", err.stack)
+    }
+    client.query(sql, (err, result)=>{
+      release()
+      if (err) {
+        return console.error("Error adding booking to DB:", err.stack)
+      }
+    })
+  })
+}
 
-// getOpenHoursForDay("monday", 1).then(res => console.log(res.rows))
+function getBookingsForRoom(room, date){
+  const sql = "SELECT date_of::time FROM bookings WHERE room_name ='" + room + "' AND DATE(date_of) = '" + date + "';"
+  return pool.query(sql);
+}
+
+// addBooking("Black Oak Room", "2022-08-26 14:00:00", "Twilight Sparkle")
+// addBooking("Black Oak Room", "2022-08-25 15:00:00", "Twilight Sparkle")
+// addBooking("Black Oak Room", "2022-08-24 11:00:00", "Twilight Sparkle")
+
+//getBookingsForRoom("Black Oak Room", "2022-08-25").then(res => console.log(res.rows))
 
 module.exports.getAllRooms = getAllRooms;
 module.exports.getOpenHoursForDay = getOpenHoursForDay;
+module.exports.addBooking = addBooking;
+module.exports.getBookingsForRoom = getBookingsForRoom;

@@ -55,15 +55,11 @@ class App extends Component{
 	}
 
 	componentDidMount(){
-		console.log("parent component mounted")
 		fetch("/rooms").then((res)=> res.json()).then(data => this.setState({
 			rooms: data
 		}));
 	}
 
-	componentDidUpdate(prevProps, prevState){
-		console.log("parent current state", this.state.currentDate, "parent prev date", prevState.currentDate)
-	}
 
 	backButtonClickHandler(e){
 		const dateCopy = new Date(this.state.currentDate);
