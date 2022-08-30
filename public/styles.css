@@ -71,7 +71,7 @@ html, body {
 }
 
 .hours div>div:not(.unavailable, .reserved):hover  {
- background: #b5e3f8;
+ background: #bbdedb;
  cursor: pointer;
 }
 
@@ -96,15 +96,20 @@ html, body {
 }
 
 .hours :nth-child(odd) .unavailable{
-  background: #b0a4cf;
+  background: lightgray;
+}
+
+.hours :nth-child(odd) .reserved{
+  background: #009688
 }
 
 .available {
-  background: orange
+  background: orange;
 }
 
 .unavailable {
- background:#70767f;
+ background:#adadad;
+ font-style: italic;
 }
 
 .selected {
@@ -112,5 +117,6 @@ html, body {
 }
 
 .reserved {
- background: dodgerblue
+ background: #69bfb7;
+ font-style: italic;
 }

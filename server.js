@@ -14,7 +14,8 @@ if (port == null || port == "") {
   port = 3001;
 }
 
-app.use(express.static(path.join(__dirname, "public")))
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.json());
 
 app.get('/rooms', (req, res)=>{
   db.getAllRooms().then(result => res.send(result.rows));
