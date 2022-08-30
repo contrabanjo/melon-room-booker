@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 
+//integers representing 24hr clock hours
 const globalOpen = 7;
 const globalClose = 22;
 

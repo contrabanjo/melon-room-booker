@@ -22,22 +22,6 @@ pool.connect().then(client => {
     console.log('db connection successful')
 });
 
-// function addPodcastToDB(guid){
-//   let sql;
-//   if (guid.length < 7) sql = "INSERT INTO podcasts VALUES('" + guid  + "', DEFAULT, DEFAULT) ON CONFLICT (guid) DO NOTHING;";
-//   else sql = "INSERT INTO podcasts VALUES " + guid  +  " ON CONFLICT (guid) DO NOTHING;";
-//   pool.connect((err, client, release)=> {
-//     if (err){
-//       return console.error("Error acquiring client", err.stack)
-//     }
-//     client.query(sql, (err, result)=>{
-//       release()
-//       if (err) {
-//         return console.error("Error adding podcast to DB:", err.stack)
-//       }
-//     })
-//   })
-// }
 
 function getAllRooms(){
   const sql = "SELECT * FROM rooms;"
@@ -69,12 +53,6 @@ function getBookingsForRoom(room, date){
   const sql = "SELECT date_of::time FROM bookings WHERE room_name ='" + room + "' AND DATE(date_of) = '" + date + "';"
   return pool.query(sql);
 }
-
-// addBooking("Black Oak Room", "2022-08-26 14:00:00", "Twilight Sparkle")
-// addBooking("Black Oak Room", "2022-08-25 15:00:00", "Twilight Sparkle")
-// addBooking("Black Oak Room", "2022-08-24 11:00:00", "Twilight Sparkle")
-
-//getBookingsForRoom("Black Oak Room", "2022-08-25").then(res => console.log(res.rows))
 
 module.exports.getAllRooms = getAllRooms;
 module.exports.getOpenHoursForDay = getOpenHoursForDay;
