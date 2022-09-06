@@ -80,7 +80,7 @@ class SingleRoomAvailability extends Component{
 	}
 
 	componentDidUpdate(prevProps){
-		if (prevProps.date !== this.props.date){
+		if (prevProps.date !== this.props.date || prevProps.selectedRoom !== this.props.selectedRoom || prevProps.selectedTime !== this.props.selectedTime){
 			this.setOpenHours();
 			this.setReservedHours();
 		}
@@ -102,7 +102,11 @@ class SingleRoomAvailability extends Component{
 
 			hours.push(
 				<div>
-					<div onClick={hourClassName === "available" || hourClassName==="selected" ? (ev)=> this.hourClickHandler(ev) : null} className={hourClassName} id={i + " " + this.props.room.name}>{this.convertNumberTo12HrTimeString(i)}</div>
+					<div onClick={hourClassName === "available" || hourClassName==="selected" ? (ev)=> {this.props.bookingClickHandler(ev)} : null} 
+					     className={hourClassName} 
+					     id={this.convertNumberTo24HrTimeString(i) + "-" + this.props.room.name}>
+					     {this.convertNumberTo12HrTimeString(i)}
+					</div>
 				</div>
 			)
 		}
@@ -111,19 +115,6 @@ class SingleRoomAvailability extends Component{
 				{hours}
 			</div>
 			);
-	}
-
-	hourClickHandler(e){
-		this.setState({selectedHour: e.target.id })
-		const room = this.props.room.name;
-
-		const day = this.props.date.getFullYear() + "-" + Number(this.props.date.getMonth()+1) + "-" + this.props.date.getDate();
-		const time = this.convertNumberTo24HrTimeString(e.target.id.split(" ")[0]);
-		const date = day + " " + time;
-
-		const user = "Corrie";
-
-		this.saveBookingToDB(room, date, user);
 	}
 
 	render(){
